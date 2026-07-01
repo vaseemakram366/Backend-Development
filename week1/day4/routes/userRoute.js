@@ -1,8 +1,39 @@
 import express from "express";
-import { getUser } from "../controller/userLogic.js";
 
-const route = express.Router()
+import {
 
-route.get('/getuser', getUser)
+    getUser,
 
-export default route
+    createUser,
+
+    updateUser,
+
+    deleteUser
+
+} from "../controller/userLogic.js";
+
+
+const route=express.Router();
+
+
+// GET
+
+route.get("/getuser",getUser);
+
+
+// POST
+
+route.post("/createuser",createUser);
+
+
+// PUT
+
+route.put("/updateuser/:id",updateUser);
+
+
+// DELETE
+
+route.delete("/deleteuser/:id",deleteUser);
+
+
+export default route;
