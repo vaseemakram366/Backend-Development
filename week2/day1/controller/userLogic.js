@@ -68,7 +68,12 @@ const getUser = async (req,res)=>{
 // UPDATE
 const updateUser = (req, res) => {
     try {
-        let name 
+        const {name, email, empId} = req.body
+        let {userid} = req.params
+
+        let user = await User.findById(userid)
+
+        if(!user)
         
     } catch (error) {
         
