@@ -1,0 +1,29 @@
+{
+  "name": "student-management-api",
+  "version": "1.0.0",
+  "description": "Student Management API using Express and MongoDB",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "express",
+    "mongodb",
+    "mongoose",
+    "student-management",
+    "crud",
+    "mvc"
+  ],
+  "author": "Vaseem Akram",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
