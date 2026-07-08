@@ -31,6 +31,40 @@ body {
     font-size: 17px;
 }
 
+/* ================= SEARCH BAR ================= */
+
+.search-container {
+    width: 100%;
+    margin: 0 auto 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 700px;
+    padding: 16px 22px;
+    font-size: 17px;
+    border: 2px solid #d6d6d6;
+    border-radius: 12px;
+    outline: none;
+    background: #ffffff;
+
+    color: #1e293b;          /* Ye line add karo */
+
+    caret-color: #2563eb;    /* Cursor blue dikhega */
+
+    transition: 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+}
+
+.search-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 12px rgba(37, 99, 235, .25);
+}
+
+/* ============================================== */
+
 .top-section {
     display: flex;
     gap: 25px;
@@ -218,6 +252,12 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .search-input {
+        max-width: 100%;
+        font-size: 16px;
+        padding: 14px 18px;
+    }
+
 }
 
 @media(max-width:500px) {
@@ -240,6 +280,11 @@ body {
 
     .btn-group {
         flex-direction: column;
+    }
+
+    .search-input {
+        font-size: 15px;
+        padding: 12px 16px;
     }
 
 }
