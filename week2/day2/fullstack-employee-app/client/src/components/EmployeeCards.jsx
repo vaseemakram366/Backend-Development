@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
-import { createuser, getuser } from '../service/api'
+import { createuser, deleteuser, getuser } from '../service/api'
 
 const EmployeeCards = () => {
     const [users, setUsers] = useState([])
@@ -61,6 +61,33 @@ const EmployeeCards = () => {
 
     }
 
+
+    async function deleteHandler(userid) {
+        try {
+            console.log(userid);
+            const response = await axios.delete(`${deleteuser}/${userid}`)
+            getUserData()
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+
+
+        }
+    }
+
+    async function updateHandler(userid){
+        try {
+            console.log(userid);
+            const response
+            
+            
+        } catch (error) {
+            
+        }
+    }
+
+
+
     return (
         <div>
             <h1>Employee System App</h1>
@@ -80,7 +107,9 @@ const EmployeeCards = () => {
                             <p>Email : {item.email}</p>
                             <p>Emp. Id: {item.empId}</p>
                             <div>
-                                <button>Delete</button>
+                                <button onClick={() => deleteHandler(item._id)}>
+                                    Delete
+                                </button>
                                 <button>Edit</button>
                             </div>
                             <hr />
