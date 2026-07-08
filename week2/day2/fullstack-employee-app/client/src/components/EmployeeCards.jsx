@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
-import { createuser, deleteuser, getuser } from '../service/api'
+import { createuserapi, deleteuserapi, getuserapi, updateuserapi } from '../service/api'
 
 const EmployeeCards = () => {
     const [users, setUsers] = useState([])
@@ -12,9 +12,14 @@ const EmployeeCards = () => {
         empId: ''
     })
 
+
+    const [isEdit, setIsEdit] = useState(false)
+
+    const [userid, setUserId] = useState('')
+
     async function getUserData() {
         try {
-            const response = await axios.get(getuser)
+            const response = await axios.get(getuserapi)
             console.log(response.data.user)
 
             setUsers(response.data.user)
@@ -32,8 +37,6 @@ const EmployeeCards = () => {
     function changeHandler(e) {
 
         let { name, value } = e.target
-
-
         setNewUser((preItem) => {
             return { ...preItem, [name]: value }
         })
@@ -43,9 +46,19 @@ const EmployeeCards = () => {
 
     async function createUser() {
         try {
-            const response = await axios.post(createuser, newUser)
+            const response = await axios.post(createuserapi, newUser)
             console.log(response)
             getUserData()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function updatedUser() {
+        try {
+            const response = await axios.put(`${updateuserapi}/${userid}`, newUser)
+            getUserData()
+            console.log(response)
         } catch (error) {
             console.log(error)
         }
@@ -55,37 +68,35 @@ const EmployeeCards = () => {
     function submitHandler(e) {
         e.preventDefault()
         // console.log(e)
-        createUser()
+        if (isEdit) {
+            updatedUser()
+        } else {
+            createUser()
+        }
         // console.log(newUser)
 
 
     }
 
-
     async function deleteHandler(userid) {
         try {
-            console.log(userid);
-            const response = await axios.delete(`${deleteuser}/${userid}`)
+            console.log(userid)
+            const response = await axios.delete(`${deleteuserapi}/${userid}`)
             getUserData()
-            console.log(response);
+            console.log(response)
         } catch (error) {
-            console.log(error);
-
-
+            console.log(error)
         }
     }
 
-    async function updateHandler(userid){
-        try {
-            console.log(userid);
-            const response
-            
-            
-        } catch (error) {
-            
-        }
-    }
 
+
+    async function editHandler(userid) {
+        console.log(userid)
+        setUserId(userid)
+        setIsEdit(true)
+
+    }
 
 
     return (
@@ -95,10 +106,8 @@ const EmployeeCards = () => {
                 <input onChange={changeHandler} name='name' placeholder='Name' /><br />
                 <input onChange={changeHandler} name='email' placeholder='Email' /><br />
                 <input onChange={changeHandler} name='empId' placeholder='Emp. Id' /><br />
-                <button type='submit'>Sumbit</button>
+                <button type='submit'>{isEdit ? 'Update' : 'Create'}</button>
             </form>
-
-
             <div>
                 {
                     users.map((item, i) => {
@@ -106,11 +115,10 @@ const EmployeeCards = () => {
                             <p>Name : {item.name}</p>
                             <p>Email : {item.email}</p>
                             <p>Emp. Id: {item.empId}</p>
+
                             <div>
-                                <button onClick={() => deleteHandler(item._id)}>
-                                    Delete
-                                </button>
-                                <button>Edit</button>
+                                <button onClick={() => deleteHandler(item._id)} >Delete</button>
+                                <button onClick={() => editHandler(item._id)}>Edit</button>
                             </div>
                             <hr />
                         </div>
