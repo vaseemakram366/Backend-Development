@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import "./EmployeeCards.css";
+
 
 import axios from 'axios'
 import { createuserapi, deleteuserapi, getuserapi, updateuserapi } from '../service/api'
+
 
 const EmployeeCards = () => {
     const [users, setUsers] = useState([])
@@ -48,6 +51,11 @@ const EmployeeCards = () => {
         try {
             const response = await axios.post(createuserapi, newUser)
             console.log(response)
+            setNewUser({
+                name: '',
+                email: '',
+                empId: ''
+            })
             getUserData()
         } catch (error) {
             console.log(error)
@@ -57,8 +65,10 @@ const EmployeeCards = () => {
     async function updatedUser() {
         try {
             const response = await axios.put(`${updateuserapi}/${userid}`, newUser)
+
             getUserData()
             console.log(response)
+
         } catch (error) {
             console.log(error)
         }
@@ -70,6 +80,12 @@ const EmployeeCards = () => {
         // console.log(e)
         if (isEdit) {
             updatedUser()
+            console.log("hiii");
+            setNewUser({
+                name: '',
+                email: '',
+                empId: ''
+            })
         } else {
             createUser()
         }
@@ -103,9 +119,9 @@ const EmployeeCards = () => {
         <div>
             <h1>Employee System App</h1>
             <form onSubmit={submitHandler}>
-                <input onChange={changeHandler} name='name' placeholder='Name' /><br />
-                <input onChange={changeHandler} name='email' placeholder='Email' /><br />
-                <input onChange={changeHandler} name='empId' placeholder='Emp. Id' /><br />
+                <input onChange={changeHandler} value={newUser.name} name='name' placeholder='Name' /><br />
+                <input onChange={changeHandler} value={newUser.email} name='email' placeholder='Email' /><br />
+                <input onChange={changeHandler} value={newUser.empId} name='empId' placeholder='Emp. Id' /><br />
                 <button type='submit'>{isEdit ? 'Update' : 'Create'}</button>
             </form>
             <div>
