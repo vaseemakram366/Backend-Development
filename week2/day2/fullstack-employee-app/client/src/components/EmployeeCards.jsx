@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "./EmployeeCards.css";
+// import "./EmployeeCards.css";
 
 
 import axios from 'axios'
@@ -119,9 +119,9 @@ const EmployeeCards = () => {
         <div>
             <h1>Employee System App</h1>
             <form onSubmit={submitHandler}>
-                <input onChange={changeHandler} value={newUser.name} name='name' placeholder='Name' /><br />
-                <input onChange={changeHandler} value={newUser.email} name='email' placeholder='Email' /><br />
-                <input onChange={changeHandler} value={newUser.empId} name='empId' placeholder='Emp. Id' /><br />
+                <input value = {newUser.name} onChange={changeHandler} value={newUser.name} name='name' placeholder='Name' /><br />
+                <input value = {newUser.email} onChange={changeHandler} value={newUser.email} name='email' placeholder='Email' /><br />
+                <input value = {newUser.empId}onChange={changeHandler} value={newUser.empId} name='empId' placeholder='Emp. Id' /><br />
                 <button type='submit'>{isEdit ? 'Update' : 'Create'}</button>
             </form>
             <div>
