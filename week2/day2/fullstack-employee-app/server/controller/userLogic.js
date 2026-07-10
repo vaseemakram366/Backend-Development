@@ -1,6 +1,7 @@
 
 import User from '../model/user.js'
 
+
 // CREATE
 const createUser = async (req, res) => {
 
@@ -101,7 +102,7 @@ const updateUser = async (req, res) => {
 
         res.status(200).json({
             message: 'data updated successfully...',
-            updateUser,
+            user: updatedUser,
             success: true
         })
 
@@ -124,7 +125,7 @@ const deleteUser = async (req, res) => {
         res.status(200).json({
             success: true,
             message: 'user deleted successfully....',
-            deleteUser
+            user: deleteduser
         })
         
     } catch (error) {
