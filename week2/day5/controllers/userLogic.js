@@ -68,7 +68,7 @@ const login = async (req, res) => {
         let user = await User.findOne({email})
 
         if (!user) {
-            return res.status(401).json({
+            return res.status(401).josn({
                 success: false,
                 message: 'user not found  by this  email id ...'
             })
@@ -82,7 +82,7 @@ const login = async (req, res) => {
             let token = jsonwebtoken.sign({ userid: user._id }, 'studentKey', { expiresIn: '3d' })
 
 
-            res.cookie('tokenCookie', token, { maxAge: 3 * 24 * 60 * 60 * 1000 })
+            res.cookie('tokenCookie', token, { maxAage: 3 * 24 * 60 * 60 * 1000 })
                 .status(200).json({
                     success: true,
                     token,
@@ -107,18 +107,6 @@ const login = async (req, res) => {
 }
 
 
-
-let students = ['ankit', 'rahul', 'priya']
-
-
-
-const getuser = async (req, res) => {
-    try {
-        res.send(students)
-    } catch (error) {
-
-    }
-}
 
 
 
