@@ -1,34 +1,33 @@
 import React, { useEffect } from 'react'
-import { io } from 'socket.io-client'
+
+import { io } from "socket.io-client"
+const socket = io("http://localhost:3000")
 
 function App() {
-  useEffect(() => {
-    const socket = io('http://localhost:3000')
 
-    socket.on('connect', () => {
-      console.log('User connected:', socket.id)
+
+  useEffect(() => {
+
+    socket.on("connect", () => {
+      console.log("User Connected :", socket.id)
     })
 
-    socket.on('Ronaldo', (msg) => {
+    socket.on("message", (msg) => {
       console.log(msg)
     })
 
-    socket.on("sending to all",(data)=>{
-      console.log(data);
-      
+    socket.on("sendingtoall", (data) => {
+      console.log(data)
     })
 
-    socket.emit("sending to all frontend","Hello for all (fronend)")
+    socket.emit("sendingtoallfrontend", "Hello for all (Frontend)")
 
-    socket.on("receive-message",(data)=>{
-      io.emit("")
+    socket.on("receive-message", (data) => {
+      console.log("frontend:", data)
     })
 
-    return () => {
-      socket.disconnect()
-    }
+
   }, [])
-
   return (
     <div>App</div>
   )
